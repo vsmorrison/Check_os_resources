@@ -10,6 +10,9 @@ import save_results
 def main(cpu_interval, stat_interval):
     process = psutil.Process()
     pid = os.getpid()
+    measures = []
+    stats = {}
+    launch_time = datetime.now()
     while True:
         timestamp = datetime.now()
         cpu_usage = resources_utilities.get_cpu_usage_info(
@@ -17,7 +20,7 @@ def main(cpu_interval, stat_interval):
         )
         memory_usage = resources_utilities.get_memory_usage_info(process)
         file_descriptors = resources_utilities.get_file_descriptors_info(process)
-        stats = {
+        measure = {
             'Date': timestamp.strftime("%d/%m/%Y, %H:%M:%S"),
             'Process ID': pid,
             'CPU Utilization': f'{cpu_usage}%',
@@ -25,20 +28,19 @@ def main(cpu_interval, stat_interval):
             'Virtual Memory Size': memory_usage.vms,
             'File Descriptors': file_descriptors
         }
-        save_results.save_statistics_to_file(stats)
+        measures.append(measure)
+        stats["resource_measures"] = measures
+        save_results.save_statistics_to_file(stats, launch_time)
         time.sleep(stat_interval)
-        #delete
-        print(stats)
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        'cpu_interval', type=float, default=0.1, help='interval for CPU check'
-    )
+        'cpu_interval', type=float, help='interval for CPU check')
     parser.add_argument(
-        'stats_refresh_value', type=int, default=1, help='''
-        new value for stats appears per entered value'''
+        'stats_frequency', type=int, help='''
+        frequency in seconds for new measure to appear'''
     )
     args = parser.parse_args()
-    main(args.cpu_interval, args.stats_refresh_value)
+    main(args.cpu_interval, args.stats_frequency)
