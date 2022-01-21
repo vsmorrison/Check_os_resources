@@ -1,5 +1,5 @@
 def get_cpu_usage_info(process, cpu_interval):
-    cpu_usage = process.cpu_preercent(cpu_interval)
+    cpu_usage = process.cpu_percent(cpu_interval)
     return cpu_usage
 
 
