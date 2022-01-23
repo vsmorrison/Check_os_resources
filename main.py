@@ -8,7 +8,7 @@ import execute_application
 
 
 def main(cpu_interval, stat_interval, app_path):
-    app_pid = execute_application.execute_app_macos(app_path)
+    app_pid = execute_application.execute_on_proper_os(app_path)
     time.sleep(1)
     process = psutil.Process(app_pid)
     measures = []
