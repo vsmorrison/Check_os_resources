@@ -28,7 +28,8 @@ def main(cpu_interval, stat_interval, app_path):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        'cpu_interval', type=float, help='interval for CPU check')
+        'cpu_interval', type=float, help='interval for CPU check'
+    )
     parser.add_argument(
         'stats_frequency', type=int, help='''
         frequency in seconds for new measure to appear'''
