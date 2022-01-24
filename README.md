@@ -21,7 +21,8 @@ python3 main.py cpu_interval stats_frequency
 ```
 ```cpu_interval``` - float, интервал для измерения процессорного времени. [Подробнее](https://psutil.readthedocs.io/en/latest/#psutil.Process.cpu_percent).
 
-```stats_frequency``` - int, частота в секундах, с которой производятся новые замеры потребления ресурсов. 
+```stats_frequency``` - int, частота в секундах, с которой производятся новые замеры потребления ресурсов.
+```app_path``` - string, путь к процессу/приложению, потребление по которому необходимо измерить.
 
 ## Сохранение результатов
 
